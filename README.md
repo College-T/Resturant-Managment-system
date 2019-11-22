@@ -1,4 +1,4 @@
-# Resturant-Managment-system
+# Resturant Managment system
 -This system can install in any restaurant.
 
 -This system contains the following modules:

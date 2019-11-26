@@ -15,9 +15,11 @@ public class ResturantManagementSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Order m= new Order(1000, "meat", 20180402);
-        m.add();
-        System.out.println(m.allPayments());
+        //Order m= new Order(1000, "checken", 20180111);
+        Meals m = new Meals(1, "meals", 100, 20);
+        //m.Add();
+        m.Delete(1);
+        System.out.println(m.toString());
     }
     
 }

@@ -27,12 +27,13 @@ public class ResturantManagementSystem {
 //        {
 //            System.out.println(m1.getOrder());
 //        }
-        filemanagement n= new filemanagement();
-        ArrayList<Order>o=(ArrayList < Order >)(Object)n.read("Order.bin");
-        for(Order o1:o)
-        {
+        Order ss = new Order(11, "cheken", 50, 20180111);
+        //ss.add();
+        filemanagement n = new filemanagement();
+        ArrayList<Order> o = (ArrayList< Order>) (Object) n.read("DataBase/Order.bin");
+        for (Order o1 : o) {
             System.out.println(o1.getOrder());
         }
     }
-    
+
 }

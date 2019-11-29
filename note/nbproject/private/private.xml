@@ -4,9 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/S:/java%20projets/note/src/note/filemanagement.java</file>
+            <file>file:/S:/java%20projets/note/src/note/Admin.java</file>
             <file>file:/S:/java%20projets/note/src/note/notification.java</file>
             <file>file:/S:/java%20projets/note/src/note/Order.java</file>
+            <file>file:/S:/java%20projets/note/src/note/Employee.java</file>
             <file>file:/S:/java%20projets/note/src/note/Note.java</file>
+            <file>file:/S:/java%20projets/note/src/note/Person.java</file>
+            <file>file:/S:/java%20projets/note/src/note/SetData.java</file>
         </group>
     </open-files>
 </project-private>

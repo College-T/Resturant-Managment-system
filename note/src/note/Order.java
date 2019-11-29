@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Order  implements Serializable{
     private double price;
     private String Order;
-    private final String File_Path = "Order.bin";
+    private final String filePath = "Order.bin";
     private int Id;
     public ArrayList<Order> m = new ArrayList<Order>();
     
@@ -45,14 +45,11 @@ public class Order  implements Serializable{
         this.Id = Id;
     }
     
-    public void loadFromFile()
+    private void loadFromFile()
     {
         try{
-            m = (ArrayList < Order >)(Object) obj.read(File_Path);
-//            for(Order k :m)
-//            {
-//                System.out.println(k.getId()+" "+k.getOrder());
-//            }
+            m = (ArrayList < Order >)(Object) obj.read(filePath);
+
         }
         catch(Exception e)
         {
@@ -61,9 +58,9 @@ public class Order  implements Serializable{
 
     }
 
-    public boolean commitFile()
+    private boolean commitFile()
     {
-        return obj.write(File_Path, m);
+        return obj.write(filePath, m);
     }
     public  boolean  add()
     {

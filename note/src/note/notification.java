@@ -5,13 +5,14 @@
  */
 package note;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author elnopy
  */
-public class notification {
+public class notification implements Serializable{
     private String notification;
     private boolean flag;
     private  final String filepath="notification.bin";
@@ -40,7 +41,7 @@ public class notification {
     }
 
    
-   public void loadFromFile()
+   public void loadFromFile()//This fun get all Data  from file and put it in ArrayList
     {
         try{
            notifications = (ArrayList <notification >)(Object) m.read(filepath);          
@@ -52,17 +53,17 @@ public class notification {
 
     }
 
-    public boolean commitFile()
+    public boolean commitFile()//This fun get all data in ArrayList and set it in File
     {
         return m.write(filepath, m);
     }
-    public boolean add()
+    public boolean add()//This fun use loadFromFile and add naw date in array thin use commitFile to save changes
     {
         loadFromFile();
        notifications.add(this);
        return  commitFile();
     }
-     public ArrayList<notification> read()
+     public ArrayList<notification> read()//This fun use loadFromFile and check if notification readed or not if not set flag =1 and return array have date that have not readed yet
     {
         ArrayList<notification>l=new ArrayList<>();
         loadFromFile();

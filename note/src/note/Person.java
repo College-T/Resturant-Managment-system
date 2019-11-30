@@ -18,6 +18,18 @@ public  class Person {
     ArrayList<Employee> emp=new ArrayList<>();
     private final String filePath="employee.bin";
 
+    public Person() {
+    }
+
+    public Person(String FName, String LName, int id, String userName, String password, int role) {
+        this.FName = FName;
+        this.LName = LName;
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+    }
+    
     public String getFName() {
         return FName;
     }

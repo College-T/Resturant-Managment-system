@@ -27,13 +27,16 @@ public class ResturantManagementSystem {
 //        {
 //            System.out.println(m1.getOrder());
 //        }
-        Order ss = new Order(11, "cheken", 50, 20180111);
-        //ss.add();
-        filemanagement n = new filemanagement();
-        ArrayList<Order> o = (ArrayList< Order>) (Object) n.read("DataBase/Order.bin");
-        for (Order o1 : o) {
-            System.out.println(o1.getOrder());
-        }
+//        Order ss = new Order(11, "cheken", 50, 20180111);
+//        ss.add();
+//        filemanagement n = new filemanagement();
+//        ArrayList<Order> o = (ArrayList< Order>) (Object) n.read("DataBase/Order.bin");
+//        for (Order o1 : o) {
+//            System.out.println(o1.getOrder());
+//        }
+        Gifs g = new Gifs("sas", 32000);
+        //g.Delete("sas");
+        System.out.print(g.toString());
     }
-
+       
 }

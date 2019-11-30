@@ -60,7 +60,7 @@ public class Meals implements Serializable {
     public Boolean Update(int Id, Meals s) {
         Load_From_file();
         int index = Get_Index(Id);
-        if (index != -1 && index == s.getId()) {
+        if (index != -1 && m.get(index).getId() == s.getId()) {
             m.set(index, s);
             return Commite_File();
         } else {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author eslam
  */
-public class Meals implements Serializable {
+public class Meals implements Serializable, standard_operations {
 
     private final String File_Path = "DataBase/Meals.bin";
     private int Id;
@@ -46,30 +46,22 @@ public class Meals implements Serializable {
         return obj.write(File_Path, m);
     }
 
-    public String Search(int Id) {
+    
+
+    @Override
+    public boolean update(int Id, Object s) {
         Load_From_file();
         int index = Get_Index(Id);
         if (index != -1) {
-            return "Details: " + m.get(index).getId() + " " + m.get(index).get_Product_Name() + " " + m.get(index).getCost() + " " + m.get(index).getOffer() + "\n";
-        } else {
-            return "NO Details\n";
-        }
-    }
-
-    //Professors.set(index, x);
-    public Boolean Update(int Id, Meals s) {
-        Load_From_file();
-        int index = Get_Index(Id);
-        if (index != -1 && m.get(index).getId() == s.getId()) {
-            m.set(index, s);
+            m.set(index, (Meals)s);
             return Commite_File();
         } else {
             return false;
         }
 
     }
-
-    public Boolean Delete(int Id) {
+    @Override
+    public boolean delete(int Id) {
         Load_From_file();
         int index = Get_Index(Id);
         if (index != -1) {
@@ -80,8 +72,8 @@ public class Meals implements Serializable {
             return false;
         }
     }
-
-    public Boolean Add() {
+    @Override
+    public boolean add() {
 
         Load_From_file();
         m.add(this);
@@ -103,7 +95,16 @@ public class Meals implements Serializable {
         Load_From_file();
         return m;
     }
-
+    
+    public Meals search(int id)
+    {
+        Load_From_file();
+        int index = Get_Index(id);
+        if(index != -1)
+            return m.get(index);
+        else return null;
+    }
+    
     @Override
     public String toString() {
         String Dedails = "";

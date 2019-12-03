@@ -32,6 +32,8 @@ public ArrayList<Object> read(String filepath) {
      try{
          file=new ObjectInputStream(new FileInputStream(filepath));
         x =(ArrayList) file.readObject();
+        // ss = (ArrayList<admin>)(Object) x;
+         //System.out.println(ss.get(0).get_name());
         file.close();
          
      }

@@ -17,26 +17,10 @@ public class ResturantManagementSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        Order k= new Order();
-//       Order b= new Order(500,"lllll",201804);
-//       b.updateOrder();
-//       
-//        ArrayList<Order >m=new ArrayList<Order >();
-//        m=b.customerProfile(201804);
-//        for(Order m1:m)
-//        {
-//            System.out.println(m1.getOrder());
-//        }
-//        Order ss = new Order(11, "cheken", 50, 20180111);
-//        ss.add();
-//        filemanagement n = new filemanagement();
-//        ArrayList<Order> o = (ArrayList< Order>) (Object) n.read("DataBase/Order.bin");
-//        for (Order o1 : o) {
-//            System.out.println(o1.getOrder());
-//        }
-        Gifs g = new Gifs("sas", 32000);
-        //g.Delete("sas");
-        System.out.print(g.toString());
+        Login log = new Login();
+        log.setVisible(true);
+        //admin e = new admin(0, "eslam733", "eslam", 19, 12345678, 30000.0);
+        //e.add_employee(1, "ahemd11", "ahmed", 20, 12345, 2500.0);
     }
        
 }

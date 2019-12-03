@@ -12,8 +12,9 @@ import java.util.ArrayList;
  *
  * @author eslam
  */
-public class Gifs implements Serializable  {
+public class Gifs implements standard_operations, Serializable {
     private final String File_Path = "DataBase/Gifs.bin";
+    private int id;
     private String name;
     private double gifs;
     private boolean status;
@@ -24,7 +25,8 @@ public class Gifs implements Serializable  {
 
     }
 
-    public Gifs(String name, double gifs) {
+    public Gifs(int id, String name, double gifs) {
+        this.id = id;
         this.name = name;
         this.gifs = gifs;
         this.status = true;
@@ -34,6 +36,11 @@ public class Gifs implements Serializable  {
         this.name = name;
     }
 
+    public void set_id(int id)
+    {
+        this.id = id;
+    }
+    
     public void set_gifs(double gifs) {
         this.gifs = gifs;
     }
@@ -53,49 +60,37 @@ public class Gifs implements Serializable  {
     public boolean get_status() {
         return status;
     }
-
-    public Boolean Update(String name, Gifs s) {
-        Load_From_file();
-        int index = Get_Index(name);
-        if (index != -1) {
-            G.set(index, s);
-            return Commite_File();
-        } else {
-            return false;
-        }
-
+    
+    public int get_id()
+    {
+        return id;
     }
 
-    public Boolean Delete(String name) {
-        Load_From_file();
-        int index = Get_Index(name);
-        if (index != -1) {
-            G.remove(index);
-
-            return Commite_File();
-        } else {
-            return false;
-        }
-    }
-
-    public Boolean Add() {
-
-        Load_From_file();
-        G.add(this);
-        return Commite_File();
-    }
-
-    public int Get_Index(String name) {
+    public int Get_Index(int id) {
         int len = G.size();
         for (int i = 0; i < len; i++) {
-            if (G.get(i).name.equals(name)) {
+            if (G.get(i).get_id() == id) {
                 return i;
             }
         }
 
         return -1;
     }
-
+    
+    public Gifs search(int id)
+    {
+        Load_From_file();
+        int index = Get_Index(id);
+        if(index != -1)
+            return G.get(index);
+        else return null;
+    }
+    
+    public ArrayList<Gifs> List() {
+        Load_From_file();
+        return G;
+    }
+    
     public void Load_From_file() {
         try {
             G = (ArrayList<Gifs>) (Object) obj.read(File_Path);
@@ -114,7 +109,7 @@ public class Gifs implements Serializable  {
         Load_From_file();
         int len = G.size();
         for (int i = 0; i < len; i++) {
-            Dedails += G.get(i).get_name() + " " + G.get(i).get_gifs() + " " + G.get(i).get_status() + "\n";
+            Dedails += G.get(i).get_id()+ " " + G.get(i).get_name() + " " + G.get(i).get_gifs() + " " + G.get(i).get_status() + "\n";
         }
         return Dedails;
     }
@@ -126,11 +121,45 @@ public class Gifs implements Serializable  {
         for (int i = 0; i < len; i++) {
             if(G.get(i).get_status())
             {
-                Dedails += G.get(i).get_name() + " " + G.get(i).get_gifs() + " " + G.get(i).get_status() + "\n";
+                Dedails += G.get(i).get_id() + " " + G.get(i).get_name() + " " + G.get(i).get_gifs() + " " + G.get(i).get_status() + "\n";
                 G.get(i).set_status(false);
             }
         }
         Commite_File();
         return Dedails;
+    }
+
+    @Override
+    public boolean add() {
+        Load_From_file();
+        G.add(this);
+        return Commite_File();
+    }
+
+    @Override
+    public boolean delete(int id) {
+        Load_From_file();
+        int index = Get_Index(id);
+        if (index != -1) {
+            G.remove(index);
+
+            return Commite_File();
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean update(int id, Object s) {
+        
+        Load_From_file();
+        int index = Get_Index(id);
+        if (index != -1) {
+            G.set(index, (Gifs)s);
+            return Commite_File();
+        } else {
+            return false;
+        }
+        
     }
 }

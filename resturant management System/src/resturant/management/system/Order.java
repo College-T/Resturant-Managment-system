@@ -3,12 +3,11 @@ package resturant.management.system;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Order implements Serializable {
-    private int Id;
+public class Order implements Serializable, standard_operations {
+    private int Id_customer;
     private double price;
     private String Order;
     private final String File_Path = "DataBase/Order.bin";
-    private int Id_customer;
     public ArrayList<Order> m = new ArrayList<Order>();
 
     private final filemanagement obj = new filemanagement();
@@ -16,10 +15,9 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(int Id, String Order, int price, int Id_customer) {
+    public Order(int Id_customer, String Order, int price) {
         this.price = price;
         this.Order = Order;
-        this.Id = Id;
         this.Id_customer = Id_customer;
     }
 
@@ -50,11 +48,11 @@ public class Order implements Serializable {
     }
 
     public int getId() {
-        return Id;
+        return Id_customer;
     }
 
     public void setId(int Id) {
-        this.Id = Id;
+        this.Id_customer = Id;
     }
 
     public void loadFromFile() {
@@ -69,7 +67,7 @@ public class Order implements Serializable {
     public boolean commitFile() {
         return obj.write(File_Path, m);
     }
-
+    @Override
     public boolean add() {
         loadFromFile();
         m.add(this);
@@ -80,21 +78,16 @@ public class Order implements Serializable {
         int len = m.size();
         int k = -1;
         for (int i = 0; i < len; i++) {
-            if (m.get(i).Id == Id) {
-                k = m.get(i).Id;
+            if (m.get(i).Id_customer == Id) {
+                k = i;
             }
         }
-        if (k != -1) {
-            return k;
-        }
-
-        return -1;
+        return k;
     }
 
-    public Order getLastOrder(int Id) {
+    public Order getLastOrder() {
         loadFromFile();
-        int index = getIndex(this.Id);
-        return m.get(index);
+        return m.get(m.size()-1);
 
     }
 
@@ -102,18 +95,18 @@ public class Order implements Serializable {
         loadFromFile();
         double sum = 0;
         for (Order m1 : m) {
-            if (m1.Id == Id) {
+            if (m1.getId_customer() == Id) {
                 sum += m1.price;
             }
         }
         return sum;
     }
-
-    public boolean updateOrder() {
+    @Override
+    public boolean update(int id, Object s) {
         loadFromFile();
-        int index = getIndex(Id);
+        int index = getIndex(id);
         if (index != -1) {
-            m.set(index, this);
+            m.set(index, (Order) s);
         } else {
             return false;
         }
@@ -134,8 +127,8 @@ public class Order implements Serializable {
         return k;
 
     }
-
-    public boolean deleteOrder(int Id) {
+    @Override
+    public boolean delete(int Id) {
         loadFromFile();
         int index = getIndex(Id);
         if (index != -1) {

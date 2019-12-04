@@ -11,14 +11,54 @@ import java.util.ArrayList;
 
 public class Employee extends Person implements Serializable,SetData{
     
-   
+    private final String File_Path = "Employee.bin";
+    private ArrayList<Employee> e = new ArrayList<>();
+   filemanagement obj = new filemanagement();
+   private int salary;
+  private String userName;
+    private String password;
+    private int role;
     public Employee() {
     
     }
 
-    public Employee(String FName, String LName, int id, String userName, String password, int role) {
-        super(FName, LName, id, userName, password, role);
+    public Employee(String FName, String LName, int id, String userName, String password,int salary) {
+        super(FName, LName, id);
+        this.salary=salary;
+        this.FName=FName;
+        this.LName=LName;
+        this.userName=userName;
+        this.password=password;
+        this.role=1;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    
+
+    
     
     @Override
     public Employee search(int id){
@@ -35,7 +75,7 @@ public class Employee extends Person implements Serializable,SetData{
     {
         try{
             e= (ArrayList < Employee >)(Object) obj.read(File_Path);
-
+              
         }
         catch(Exception e)
         {
@@ -95,5 +135,7 @@ public class Employee extends Person implements Serializable,SetData{
         loadFromFile();
         return (ArrayList<Object>)(Object)e;
     }
+
+   
 
 }

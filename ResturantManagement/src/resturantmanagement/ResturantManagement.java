@@ -21,12 +21,12 @@ public class ResturantManagement {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       Meals m=new Meals(20180402, "chicken", 150, 0);
-       m.update();
-     ArrayList<Meals>l=(ArrayList<Meals>)(Object)m.list();
-     for(Meals l1:l)
-     {
-         System.out.println(l1.getId()+" "+l1.getCost()+" "+l1.getOffer());
-     }
+       Employee m=new Employee("mohame4d ", "saleh", 20180403, "amrsaleh", "123456789", 1000);m.add();
+      ArrayList<Employee> l=(ArrayList< Employee>)(Object)m.list();
+      for(Employee l1:l)
+      {
+          System.out.println(l1.getId()+" "+l1.getFName());
+      }
+       
 }
 }

@@ -7,33 +7,25 @@ package resturantmanagement;
 
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author elnopy
  */
-public  class Person {
-    private String FName;
-    private String LName;
-    private int id;
-    private String userName;
-    private String password;
-    private  int role;
-     protected final String File_Path = "Employee.bin";
-    protected ArrayList<Employee> e = new ArrayList<Employee>();
-    protected filemanagement obj = new filemanagement();
-
+public  class Person implements Serializable{
+    protected String FName;
+    protected String LName;
+    protected int id;
     public Person() {
     }
 
-    public Person(String FName, String LName, int id, String userName, String password, int role) {
+    public Person(String FName, String LName, int id) {
         this.FName = FName;
         this.LName = LName;
         this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.role = role;
+       
     }
     
     public String getFName() {
@@ -60,29 +52,7 @@ public  class Person {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
+    
     
       
      

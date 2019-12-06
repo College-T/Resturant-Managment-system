@@ -21,15 +21,21 @@ public class ResturantManagement {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//        customers p=new customers("amr", "saleh");p.add();
+        //System.out.println(p.search(1).getFname());
+        
+        Meals n =new Meals("meat", 10000);
+       n.add();
+     // n.makeOffer("chicken", 0.1);
+      
+        ArrayList<String>o=new ArrayList<>();
        
-       Employee p=new Employee("amr", "ssaleh",20180403, "amr@saleh","123456789",1000);p.add();
-       
-       ArrayList<Employee>l=(ArrayList<Employee>)(Object)p.list();
-       for(Employee l1:l)
-       {
-           System.out.println(l1.getFName());
-       }
-//      int o= p.login( "amr@saleh","123456789");
-//        System.out.println(o);
+        o.add("chicken");
+        o.add("meat");
+        
+         Order m=new Order(o, 1);
+         System.out.println(m.getPrice());
+    }    
+  
 }
-}
+

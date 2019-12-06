@@ -1,101 +1,89 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package resturantmanagement;
-
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class Employee extends Person implements Serializable,SetData{
-    
+public class Employee extends Person implements Serializable, SetData {
+
     private final String File_Path = "Employee.bin";
     private ArrayList<Employee> e = new ArrayList<>();
-   filemanagement obj = new filemanagement();
-   private int salary;
-  private String userName;
-    private String password;
-    private int role;
+    filemanagement obj = new filemanagement();
+    private int salary;
+    private int id;
+
     public Employee() {
-    
+
     }
 
-    public Employee(String FName, String LName, int id, String userName, String password,int salary) {
-        super(FName, LName, id);
-        this.salary=salary;
-        this.userName=userName;
-        this.password=password;
-        this.role=1;
+    public Employee(String FName, String LName, String userName, String password) {
+        super(FName, LName, userName, password, 1);
+        loadFromFile();
+        if (e.isEmpty()) {
+            setId(1);
+        } else {
+            setId(e.get(e.size() - 1).getId() + 1);
+        }
+
     }
 
-    public String getUserName() {
-        return userName;
+    public int getId() {
+        return id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPassword() {
-        return password;
+    public int getSalary() {
+        return salary;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
-
-    
     @Override
-    public Employee search(int id){
+    public Employee search(int id) {
         Employee temp = new Employee();
-        loadFromFile ();
+        loadFromFile();
         int index = getIndex(id);
-        if (index != -1){
+        if (index != -1) {
             return e.get(index);
-        }else {
-           return temp;
+        } else {
+            return temp;
         }
     }
-    private void loadFromFile()
-    {
-        try{
-            e= (ArrayList < Employee >)(Object) obj.read(File_Path);
-              
-        }
-        catch(Exception e)
-        {
+
+    private void loadFromFile() {
+        try {
+            e = (ArrayList< Employee>) (Object) obj.read(File_Path);
+
+        } catch (Exception e) {
             System.out.println(e);
         }
 
     }
-    private boolean commitFile()
-    {
+
+    private boolean commitFile() {
         return obj.write(File_Path, e);
     }
+
     @Override
-    public boolean update( ){
-       loadFromFile();
-        int index = getIndex(this.getId());
-        if (index != -1 ) {
+    public boolean update(int id) {
+        loadFromFile();
+        int index = getIndex(id);
+        if (index != -1) {
+            this.setId(id);
             e.set(index, this);
             return commitFile();
         } else {
             return false;
         }
     }
-    
+
     @Override
-     public boolean delete(int id) {
+    public boolean delete(int id) {
         loadFromFile();
         int index = getIndex(id);
         if (index != -1) {
@@ -106,15 +94,16 @@ public class Employee extends Person implements Serializable,SetData{
             return false;
         }
     }
+
     @Override
-     public boolean add() {
+    public boolean add() {
 
         loadFromFile();
         e.add(this);
         return commitFile();
     }
-     
-     private int getIndex(int id) {
+
+    private int getIndex(int id) {
         int len = e.size();
         for (int i = 0; i < len; i++) {
             if (e.get(i).getId() == id) {
@@ -126,23 +115,20 @@ public class Employee extends Person implements Serializable,SetData{
     }
 
     @Override
-     public ArrayList<Object> list(){
+    public ArrayList<Object> list() {
         loadFromFile();
-        return (ArrayList<Object>)(Object)e;
+        return (ArrayList<Object>) (Object) e;
     }
-     public int login(String userName ,String passWord)
-     {
-         loadFromFile();
-         for(Employee m:e)
-         {
-             if(m.userName.equals(userName)&&m.password.equals(passWord))
-             {
-                 return role;
-             }
-         }
-       return 0;
-     }
 
-   
+    @Override
+    public int login(String userName, String passWord) {
+        loadFromFile();
+        for (Employee m : e) {
+            if (m.getUserName().equals(userName) && m.getPassword().equals(passWord)) {
+                return m.getRole();
+            }
+        }
+        return 0;
+    }
 
 }

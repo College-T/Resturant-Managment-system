@@ -12,8 +12,10 @@ import java.util.ArrayList;
  *
  * @author eslam
  */
-public class customers extends Person implements Serializable, SetData{
-
+public class customers implements Serializable, SetData{
+protected String fname;
+    protected String lname;
+    private  int id;
     private final String File_Path = "Customer.bin";
     public ArrayList<customers> m = new ArrayList<customers>();
     private  filemanagement obj = new filemanagement();
@@ -21,8 +23,36 @@ public class customers extends Person implements Serializable, SetData{
     public customers() {
     }
 
-    public customers(String FName, String LName, int id) {
-        super(FName, LName, id);
+    public customers(String FName, String LName) {
+        Load_From_file();
+        this.fname=FName;
+        this.lname=LName;
+        if (m.size() == 0) setId(1);
+        else setId( m.get(m.size()-1).getId()+1 );
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     
@@ -40,10 +70,11 @@ public class customers extends Person implements Serializable, SetData{
 
     }
     
-//    @Override
-//    public boolean login(String user_name, int password) {
-//        return false;
-//    }
+    public boolean exsistCustomer(int id) {
+       Load_From_file();
+        int index = getIndex(id);
+          return index!=-1;
+    }
     
     @Override
     public ArrayList<Object> list()
@@ -71,10 +102,11 @@ public class customers extends Person implements Serializable, SetData{
     }
     
     @Override
-    public boolean update() {
+    public boolean update(int id) {
         Load_From_file();
-        int index = getIndex(this.id);
+        int index = getIndex(id);
         if (index != -1) {
+            this.setId(id);
             m.set(index, this);
             return Commite_File();
         } else {
@@ -105,7 +137,7 @@ public class customers extends Person implements Serializable, SetData{
     public int getIndex(int Id) {
         int len = m.size();
         for (int i = 0; i < len; i++) {
-            if (m.get(i).getId() == Id) {
+            if (m.get(i).id == Id) {
                 return i;
             }
         }

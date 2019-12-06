@@ -8,12 +8,13 @@ package resturantmanagement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Order  implements Serializable{
     private double price;
-    private String Order;
+    private ArrayList<String> Order;
     private final String filePath = "Order.bin";
-    private int Id;
+    private int customerId;
     public ArrayList<Order> m = new ArrayList<Order>();
     
     private filemanagement obj = new filemanagement();
@@ -21,34 +22,52 @@ public class Order  implements Serializable{
     public Order() {
     }
 
-    public Order(int price, String Order, int Id) {
-        this.price = price;
-        this.Order = Order;
-        this.Id = Id;
+    public Order( ArrayList<String> Order, int Id) {
+      
+         double payments = 0;
+        setCustomerId(Id); 
+        setOrder(Order);
+        for (String o: Order) {
+           
+            payments += new Meals().calckOffer(o);
+        }
+        setPrice(payments);
     }
+
+    
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public String getOrder() {
+    public ArrayList<String> getOrder() {
         return Order;
     }
 
-    public void setOrder(String Order) {
+    public void setOrder(ArrayList<String> Order) {
         this.Order = Order;
     }
 
-    public int getId() {
-        return Id;
+    
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setCustomerId(int customerId) {
+        
+            if(new customers().exsistCustomer(customerId))
+            {
+                this.customerId=customerId;
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "add this customer first");
+            }
+        
     }
     
     private void loadFromFile()
@@ -80,7 +99,7 @@ private int getIndex(int Idcustomer)
         int k=-1;
         for(int i = 0; i < len; i++)
         {
-            if(m.get(i).Id == Idcustomer)k=i ;
+            if(m.get(i).customerId == Idcustomer)k=i ;
         }
         
             return k;
@@ -100,7 +119,7 @@ private int getIndex(int Idcustomer)
         loadFromFile();
         double sum=0;
         for (Order m1 : m) {
-            if (m1.Id == Idcustomer) {
+            if (m1.getCustomerId() == Idcustomer) {
                 sum += m1.price;
             }
         }
@@ -113,7 +132,7 @@ private int getIndex(int Idcustomer)
         ArrayList<Order> k=new ArrayList<Order>();
         for(Order m1:m)
         {
-            if(m1.getId()==idcustomer)
+            if(m1.getCustomerId()==idcustomer)
             {
                 k.add(m1);
             }

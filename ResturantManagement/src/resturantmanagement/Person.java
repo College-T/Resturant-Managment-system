@@ -9,24 +9,39 @@ package resturantmanagement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
  * @author elnopy
  */
-public  class Person implements Serializable{
+public abstract  class Person implements Serializable{
     protected String FName;
     protected String LName;
-    protected int id;
+   private int id;
+   
+     private String userName;
+    private String password;
+    private int role;
+   
+    
     public Person() {
+     
     }
-
-    public Person(String FName, String LName, int id) {
+private boolean isFilled;
+    public Person(String FName, String LName, String userName, String password, int role) {
         this.FName = FName;
         this.LName = LName;
-        this.id = id;
-       
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+        isFilled = false;
+    
     }
+
+   
+
+   
     
     public String getFName() {
         return FName;
@@ -40,20 +55,32 @@ public  class Person implements Serializable{
         return LName;
     }
 
-    public void setLName(String LName) {
-        this.LName = LName;
+    public String getUserName() {
+        return userName;
     }
 
-    public int getId() {
-        return id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     
-    
+    public abstract  int login(String userName ,String passWord);
       
      
     

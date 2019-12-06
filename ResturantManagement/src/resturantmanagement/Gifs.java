@@ -77,9 +77,9 @@ public class Gifs implements Serializable,Comparable<Gifs> {
         }
     }
 
-    public boolean delete(int id) {
+    public boolean delete(int payment) {
         loadFromFile();
-        int index = getIndex(id);
+        int index = getIndex(payment);
         if (index != -1) {
             e.remove(index);
 

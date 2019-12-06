@@ -9,41 +9,41 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+public class admin extends Person implements Serializable {
 
-
-public class admin extends Person implements Serializable{
-   private final String filePath="Employee.bin";
-   private ArrayList <admin> admins=new ArrayList<>();
-   filemanagement obj=new filemanagement();
-   private String userName;
-   private String passWord;
-  private int salary;
-   private int role;
-    public admin(){};
-    
-    public admin(String FName, String LName, int id,String userName,String PassWord) {
-        super(FName, LName, id);
-        this.role=2;
-        this.passWord=PassWord;
-        this.userName=userName;
+    private final String filePath = "admin.bin";
+    private ArrayList<admin> admins = new ArrayList<>();
+    filemanagement obj = new filemanagement();
+    private final int id=0;
+    public admin() {
     }
-    private void loadFromFile()
-    {
-        try{
-            admins= (ArrayList < admin >)(Object) obj.read(filePath);
-              
-        }
-        catch(Exception e)
-        {
+
+    
+   
+
+    public admin(String FName, String LName, String userName, String password) {
+        super(FName, LName, userName, password, 2);
+    }
+
+    private void loadFromFile() {
+        try {
+            admins = (ArrayList< admin>) (Object) obj.read(filePath);
+
+        } catch (Exception e) {
             System.out.println(e);
         }
 
     }
-    private boolean commitFile()
-    {
+
+    private boolean commitFile() {
         return obj.write(filePath, admins);
     }
-   private int getIndex(int id) {
+
+    public int getId() {
+        return id;
+    }
+
+    private int getIndex(int id) {
         int len = admins.size();
         for (int i = 0; i < len; i++) {
             if (admins.get(i).getId() == id) {
@@ -53,39 +53,38 @@ public class admin extends Person implements Serializable{
 
         return -1;
     }
-    public boolean update( ){
-       loadFromFile();
-        int index = getIndex(this.getId());
-        if (index != -1 ) {
+
+    public boolean update() {
+        loadFromFile();
+        int index = getIndex(0);
+        if (index != -1) {
             admins.set(index, this);
             return commitFile();
         } else {
             return false;
         }
     }
- 
-     public boolean add() {
 
+//     public boolean add() {
+//
+//        loadFromFile();
+//        admins.add(this);
+//        return commitFile();
+//    }
+    @Override
+    public int login(String userName, String passWord) {
         loadFromFile();
-        admins.add(this);
-        return commitFile();
-    }
-     public int login(String userName ,String passWord)
-     {
-         loadFromFile();
-         for(admin m:admins)
-         {
-             if(m.userName.equals(userName)&&m.passWord.equals(passWord))
-             {
-                 return role;
-             }
-         }
-        
-         return 0;
-         
-       
-     }
+        for (admin m : admins) {
+            if (m.getUserName().equals(userName) && m.getPassword().equals(passWord)) {
+                return m.getRole();
+            }
+        }
+        return 0;
 
-    
-    
+    }
+//     public ArrayList<admin> list()
+//     {
+//         return admins;
+//     }
+
 }

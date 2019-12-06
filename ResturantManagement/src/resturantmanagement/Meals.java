@@ -19,11 +19,11 @@ import java.util.ArrayList;
  *
  * @author eslam
  */
-public class Meals implements Serializable,SetData {
+public class Meals implements Serializable {
 
-    private final String File_Path = "Meals.bin";
-    private int Id;
-    private String Product_Name;
+    private final String filePath = "Meals.bin";
+    
+    private String productName;
     private double Cost;
     private double Offer;
     public ArrayList<Meals> m = new ArrayList<Meals>();
@@ -33,16 +33,16 @@ public class Meals implements Serializable,SetData {
 
     }
 
-    public Meals(int id, String product_name, double cost, double offer) {
-        Id = id;
-        Product_Name = product_name;
-        Cost = cost;
-        Offer = offer;
+    public Meals( String product_name, double cost) {
+     
+       this. productName = product_name;
+        this.Cost = cost;
+        this.Offer = 0;
     }
 
     private void loadFromFile() {
         try {
-            m = (ArrayList<Meals>) (Object) obj.read(File_Path);
+            m = (ArrayList<Meals>) (Object) obj.read(filePath);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -50,14 +50,13 @@ public class Meals implements Serializable,SetData {
     }
 
     private boolean commiteFile() {
-        return obj.write(File_Path, m);
+        return obj.write(filePath, m);
     }
 
-    @Override
-    public Object search(int id) {
+    public Object search(String productName) {
         loadFromFile();
         Meals temp =new Meals();
-        int index = getIndex(id);
+        int index = getIndex(productName);
         if (index != -1) {
             return m.get(index);
         } else {
@@ -66,10 +65,10 @@ public class Meals implements Serializable,SetData {
     }
 
     //Professors.set(index, x);
-    @Override
+  
     public boolean update() {
         loadFromFile();
-        int index = getIndex(this.getId());
+        int index = getIndex(this.get_Product_Name());
         if (index != -1 ) {
             m.set(index, this);
             return commiteFile();
@@ -78,11 +77,32 @@ public class Meals implements Serializable,SetData {
         }
 
     }
-
-    @Override
-    public boolean delete(int Id) {
+//    public boolean  makeOffer(double offer)      
+//    {
+//        this.setOffer(offer);=offer;
+//        return this.update();
+//    }
+    public void makeOffer(String name, double discount) {
+        Meals x = new Meals();
         loadFromFile();
-        int index = getIndex(Id);
+        int index = getIndex(name);
+        x.setOffer(discount);
+        x.setProductName(name);
+        x.setCost(m.get(index).getCost());
+         m.set(index, x);
+        commiteFile();
+    }
+    public double calckOffer(String productName)
+    
+        {
+            loadFromFile();
+                int index=getIndex(productName);
+              double d= ( m.get(index).getCost()-(m.get(index).getCost()*m.get(index).getOffer()));
+               return  d;
+        }
+    public boolean delete(String productName) {
+        loadFromFile();
+        int index = getIndex(productName);
         if (index != -1) {
             m.remove(index);
 
@@ -92,7 +112,7 @@ public class Meals implements Serializable,SetData {
         }
     }
 
-    @Override
+   
     public boolean add() {
 
         loadFromFile();
@@ -100,10 +120,10 @@ public class Meals implements Serializable,SetData {
         return commiteFile();
     }
 
-    private int getIndex(int Id) {
+    private int getIndex(String productName) {
         int len = m.size();
         for (int i = 0; i < len; i++) {
-            if (m.get(i).Id == Id) {
+            if (m.get(i).productName.equalsIgnoreCase(productName)) {
                 return i;
             }
         }
@@ -111,25 +131,8 @@ public class Meals implements Serializable,SetData {
         return -1;
     }
 
-    
-
-    @Override
-    public String toString() {
-        String Dedails = "";
-        loadFromFile();
-        int len = m.size();
-        for (int i = 0; i < len; i++) {
-            Dedails += m.get(i).getId() + " " + m.get(i).get_Product_Name() + " " + m.get(i).getCost() + " " + m.get(i).getOffer() + "\n";
-        }
-        return Dedails;
-    }
-
-    public int getId() {
-        return this.Id;
-    }
-
     public String get_Product_Name() {
-        return this.Product_Name;
+        return this.productName;
     }
 
     public double getCost() {
@@ -140,12 +143,14 @@ public class Meals implements Serializable,SetData {
         return this.Offer;
     }
     
-    public void setId(int id) {
-        Id = id;
-    }
+    
 
     public void get_Product_Name(String product_name) {
-        Product_Name = product_name;
+        productName = product_name;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public void setCost(double cost) {
@@ -155,7 +160,7 @@ public class Meals implements Serializable,SetData {
     public void setOffer(double offer) {
         Offer = offer;
     }
-    @Override
+    
     public ArrayList<Object>list()
     {
         loadFromFile();

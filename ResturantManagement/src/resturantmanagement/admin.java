@@ -80,10 +80,11 @@ public class admin extends Person implements Serializable {
             }
         }
         return 0;
+
     }
-     public ArrayList<admin> list()
-     {
-         return admins;
-     }
+//     public ArrayList<admin> list()
+//     {
+//         return admins;
+//     }
 
 }

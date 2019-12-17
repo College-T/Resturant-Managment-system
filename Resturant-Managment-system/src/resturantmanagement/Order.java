@@ -181,7 +181,6 @@ private int getIndex(int Idcustomer)
             if(m1.getEmployeeId()==idEmployee)
             {
                 l.add(m1);
-                System.out.println(m1.getPrice());
             }
         }
         return l;

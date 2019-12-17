@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * @author eslam
  */
 public class customers implements Serializable, SetData{
+    
 protected String fname;
     protected String lname;
     private  int id;

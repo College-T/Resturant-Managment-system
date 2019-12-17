@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import resturantmanagement.Gifs;
@@ -58,11 +59,10 @@ public class Addgifs extends JPanel{
                     
                Gifs m=new Gifs(giftTxt.getText(),Integer.parseInt(payment.getText()));
                m.add();
-               check.setText("added");
-               check.setForeground(Color.red);
+                    JOptionPane.showMessageDialog(null,"added");
                   }
                 else
-                    
+                    JOptionPane.showMessageDialog(null,"error");
                 {
                     check.setText("error");
                check.setForeground(Color.red);

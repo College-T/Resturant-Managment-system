@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Employee extends Person implements Serializable, SetData {
-
+    
     private final String File_Path = "Employee.bin";
     private ArrayList<Employee> e = new ArrayList<>();
     filemanagement obj = new filemanagement();

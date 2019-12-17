@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * @author eslam
  */
 public class Meals implements Serializable {
-
+    
     private final String filePath = "Meals.bin";
     
     private String productName;

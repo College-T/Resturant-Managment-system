@@ -1,34 +1,41 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package internal_panals;
 
 import GUI.buttoncustom;
 import java.awt.Dimension;
-import java.awt.JobAttributes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import resturantmanagement.Employee;
-import resturantmanagement.customers;
+import resturantmanagement.Gifs;
 
-public class listEmployee extends JPanel {
-
+/**
+ *
+ * @author nice
+ */
+public class Listgift extends JPanel{
+    
     buttoncustom Refresh = new buttoncustom("Refresh");
-    JTable list_employee = new JTable();
-    ArrayList<Employee> l = (ArrayList<Employee>) (Object) new Employee().list();
-    private JScrollPane jScrollPane1 = new JScrollPane();
-
-    public listEmployee() {
-        super(null);
-
-        list_employee.setModel(new DefaultTableModel(
+    JTable list_gift = new JTable();
+    ArrayList<Gifs> l = (ArrayList<Gifs>) (Object) new Gifs().list();
+     private JScrollPane jScrollPane1 = new JScrollPane();
+     public Listgift ()
+     {
+         
+         setLayout(null);
+         setSize(700, 500);
+        list_gift.setModel(new DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "id", "first name", "last name", "password", "username"
+                    "gift","payment"
                 }
         ) {
             boolean[] canEdit = new boolean[]{
@@ -36,7 +43,7 @@ public class listEmployee extends JPanel {
             };
 
         });
-        jScrollPane1.setViewportView(list_employee);
+        jScrollPane1.setViewportView(list_gift);
         add(jScrollPane1);
         jScrollPane1.setBounds(200, 100, 300, 400);
         jScrollPane1.setVisible(true);
@@ -50,23 +57,22 @@ public class listEmployee extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 addRowsTolist();
             }
+
+             
         });
 
         addRowsTolist();
-    }
-
-    public void addRowsTolist() {
-        DefaultTableModel model = (DefaultTableModel) list_employee.getModel();
+     }
+     public void addRowsTolist() {
+        DefaultTableModel model = (DefaultTableModel) list_gift.getModel();
         model.setNumRows(0);
         Object rowData[] = new Object[5];
-        l = (ArrayList<Employee>) (Object) new Employee().list();
+        l = (ArrayList<Gifs>) (Object) new Gifs().list();
 
-        for (Employee x : l) {
-            rowData[0] = x.getId();
-            rowData[1] = x.getFName();
-            rowData[2] = x.getLName();
-            rowData[3] = x.getPassword();
-            rowData[4] = x.getUserName();
+        for (Gifs x : l) {
+            rowData[0] = x.getGift();
+            rowData[1] = x.getPayment();
+            
             model.addRow(rowData);
         }
 
@@ -76,4 +82,5 @@ public class listEmployee extends JPanel {
     public Dimension getPreferredSize() {
         return new Dimension(602, 550);
     }
+    
 }

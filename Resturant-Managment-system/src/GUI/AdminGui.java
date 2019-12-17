@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import GUI.buttoncustom;
+import internal_frames.EditGifts;
 import internal_panals.Addgifs;
 import internal_panals.report_panal_C;
 import internal_panals.report_panal_E;
@@ -29,7 +30,7 @@ public class AdminGui extends JFrame {
     editEmployee m = new editEmployee();
     private report_panal_E report_employees;
     private report_panal_C report_customers;
-    Addgifs gift=new Addgifs();
+    EditGifts gift=new EditGifts();
     public AdminGui() {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,6 +103,7 @@ public class AdminGui extends JFrame {
                 m.setVisible(true);
                 p.setVisible(false);
                 o.setVisible(false);
+                gift.setVisible(false);
 
             }
         });

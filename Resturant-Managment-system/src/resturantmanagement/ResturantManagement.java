@@ -33,7 +33,7 @@ public class ResturantManagement {
 //        AdminGui m=new AdminGui();m.setVisible(true);
 //        customers p=new customers("amr", "saleh");p.add();
         //System.out.println(p.search(1).getFname());
-       admin n=new admin("a", "a", "a", "a");n.add();
+//       admin n=new admin("a", "a", "a", "a");n.add();
         login m=new login();
         m.setVisible(true);
 //Order oo = new Order();
@@ -61,6 +61,8 @@ public class ResturantManagement {
 //        e.add();
 //        ArrayList<Employee> a = (ArrayList<Employee>) (Object)e.list();
 //        for(int i = 0; i < a.size(); i++) System.out.println(a.get(i).getUserName() + " " + a.get(i).getPassword());
+//    Gifs s = new Gifs("more one tea", 1000);
+//    s.add();
     }    
   
 }

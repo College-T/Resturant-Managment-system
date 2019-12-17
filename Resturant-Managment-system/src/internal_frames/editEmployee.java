@@ -1,7 +1,7 @@
 package internal_frames;
 
 
-
+   
 import GUI.buttoncustom;
 import internal_panals.addEmployee;
 import internal_panals.listEmployee;
@@ -23,7 +23,7 @@ public class editEmployee extends JPanel {
 
     private addEmployee addEmployeePanel = new addEmployee();
     private listEmployee showEmployeepanel = new listEmployee();
-    private updateEmployee editEmployeePanal = new updateEmployee(showEmployeepanel);
+    private updateEmployee editEmployeePanal = new updateEmployee();
     private JPanel staticPanal, dynamicPanal;
     private buttoncustom addEmployee, editEmplopyee, showEmployee;
     private GridBagLayout layout = new GridBagLayout();
@@ -97,9 +97,5 @@ public class editEmployee extends JPanel {
             }
         });
     }
-    @Override
-     public Dimension getPreferredSize()
-     {
-         return new Dimension(602, 550);
-     }
+    
 }

@@ -12,23 +12,24 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import GUI.buttoncustom;
+import internal_panals.Addgifs;
 import internal_panals.report_panal_C;
 import internal_panals.report_panal_E;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
-import resturantmanagement.imagepanal;
 
 public class AdminGui extends JFrame {
 
-    private buttoncustom Employee, Meal, report_E, report_C, alter;
+    private buttoncustom Employee, Meal, report_E, report_C, alter,addGift;
     private int show_r_E = 2, show_r_C = 2;
     AlterAdmin o = new AlterAdmin();
     mealsG p = new mealsG();
     editEmployee m = new editEmployee();
     private report_panal_E report_employees;
     private report_panal_C report_customers;
+    Addgifs gift=new Addgifs();
     public AdminGui() {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,6 +54,8 @@ public class AdminGui extends JFrame {
     public void inintComponent() {
         report_employees = new report_panal_E();
         add(report_employees);
+        addGift=new buttoncustom("gift");
+      
         report_employees.setBounds(10, 20, 200, 200);
         report_employees.setVisible(false);
         report_employees.get_reports();
@@ -67,9 +70,12 @@ public class AdminGui extends JFrame {
         m.setVisible(true);
         p.setOpaque(false);
         p.setVisible(false);
+        gift.setOpaque(false);
+        gift.setVisible(false);
         add(p);
         add(m);
         add(o);
+        add(gift);
         Employee = new buttoncustom("edit Employee");
         Meal = new buttoncustom("edit Meals");
         Employee.setBounds(350, 0, 130, 20);
@@ -83,7 +89,9 @@ public class AdminGui extends JFrame {
         report_C.setBounds(890, 0, 100, 20);
         report_C.setVisible(true);
         Meal.setBounds(500, 0, 100, 20);
-        alter.setBounds(630, 0, 100, 20);
+        alter.setBounds(630, 0, 100, 20);         
+        addGift.setBounds(760, 0, 100, 20);
+         add(addGift);
         add(Employee);
         add(alter);
         add(Meal);
@@ -104,6 +112,7 @@ public class AdminGui extends JFrame {
                 p.setVisible(true);
                 m.setVisible(false);
                 o.setVisible(false);
+                gift.setVisible(false);
 
             }
         });
@@ -132,6 +141,7 @@ public class AdminGui extends JFrame {
                 o.setVisible(true);
                 p.setVisible(false);
                 m.setVisible(false);
+                gift.setVisible(false);
             }
         });
         
@@ -150,6 +160,16 @@ public class AdminGui extends JFrame {
                     show_r_C--;
                 }
 
+            }
+        });
+        addGift.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                o.setVisible(false);
+                p.setVisible(false);
+                m.setVisible(false);
+                gift.setVisible(true);
             }
         });
 

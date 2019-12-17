@@ -55,6 +55,7 @@ public class report_panal_E extends JPanel{
         
         
     }
+    
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         setForeground(Color.BLUE);

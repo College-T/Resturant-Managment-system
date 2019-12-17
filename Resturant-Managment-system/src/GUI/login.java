@@ -16,7 +16,6 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import resturantmanagement.Order;
-import resturantmanagement.imagepanal;
 
 /**
  *

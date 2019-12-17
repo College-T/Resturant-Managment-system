@@ -22,7 +22,7 @@ public class updateEmployee extends JPanel implements ActionListener {
     JTextField searchEmp, Fname, Lname, userName, passWord;
     labelcustom Fnamelable, LnameLable, userNameLable, passWordLable, check;
     listEmployee l;
-    public updateEmployee(listEmployee l) {
+    public updateEmployee() {
         super(null);
         this.l = l;
         this.setOpaque(false);

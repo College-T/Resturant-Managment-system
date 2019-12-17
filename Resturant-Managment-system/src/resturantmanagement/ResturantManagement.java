@@ -33,7 +33,7 @@ public class ResturantManagement {
 //        AdminGui m=new AdminGui();m.setVisible(true);
 //        customers p=new customers("amr", "saleh");p.add();
         //System.out.println(p.search(1).getFname());
-       admin n=new admin("a", "a", "a", "a");n.add();
+ //      admin n=new admin("a", "a", "a", "a");n.add();
         login m=new login();
         m.setVisible(true);
 //Order oo = new Order();

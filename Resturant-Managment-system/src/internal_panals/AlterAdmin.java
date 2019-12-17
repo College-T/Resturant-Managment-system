@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.plaf.OptionPaneUI;
 import resturantmanagement.admin;
 
 /**
@@ -74,13 +75,19 @@ public class AlterAdmin extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                admin q = new admin(firstName.getText(), lastName.getText(), userName.getText(), passWord.getText());
-                JOptionPane.showMessageDialog(null, "Updated Successfully ^_^", "Success", JOptionPane.INFORMATION_MESSAGE);
-                q.update();
-                firstName.setText("");
-                lastName.setText("");
-                passWord.setText("");
-                userName.setText("");
+                if (firstName.getText().equals("") || lastName.getText().equals("") || userName.getText().equals("") || passWord.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "You should full all the input fields", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    
+                    admin q = new admin(firstName.getText(), lastName.getText(), userName.getText(), passWord.getText());
+                    JOptionPane.showMessageDialog(null, "Updated Successfully ^_^", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    q.update();
+                    firstName.setText("");
+                    lastName.setText("");
+                    passWord.setText("");
+                    userName.setText("");
+                }
+                
 
             }
         });

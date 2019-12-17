@@ -20,6 +20,7 @@ import java.util.ArrayList;
  * @author elnopy
  */
 public class Notification implements Serializable{
+    
     private String notification;
     private boolean flag;
     private  final String filepath="Notification.bin";

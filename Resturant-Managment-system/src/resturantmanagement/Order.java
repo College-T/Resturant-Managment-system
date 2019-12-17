@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Order  implements Serializable{
+    
     private double price;
     private ArrayList<String> Order;
     private final String filePath = "Order.bin";

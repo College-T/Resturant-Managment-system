@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author elnopy
  */
 public abstract  class Person implements Serializable{
+    
     protected String FName;
     protected String LName;
    private int id;

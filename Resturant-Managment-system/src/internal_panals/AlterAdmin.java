@@ -66,7 +66,6 @@ public class AlterAdmin extends JPanel {
         add(lastName);
         
         ArrayList<admin>k=new admin().list();
-        System.out.println(k.get(0).getFName());
         firstName.setText(k.get(0).getFName());
         lastName.setText(k.get(0).getLName());
         passWord.setText(k.get(0).getPassword());

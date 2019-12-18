@@ -23,7 +23,7 @@ import javax.swing.WindowConstants;
 
 public class AdminGui extends JFrame {
 
-    private buttoncustom Employee, Meal, report_E, report_C, alter,addGift;
+    private buttoncustom Employee, Meal, report_E, report_C, alter,addGift,logout;
     private int show_r_E = 2, show_r_C = 2;
     AlterAdmin o = new AlterAdmin();
     mealsG p = new mealsG();
@@ -56,13 +56,14 @@ public class AdminGui extends JFrame {
         report_employees = new report_panal_E();
         add(report_employees);
         addGift=new buttoncustom("gift");
-      
+      logout=new buttoncustom("logout");
         report_employees.setBounds(10, 20, 200, 200);
         report_employees.setVisible(false);
         report_employees.get_reports();
         report_customers = new report_panal_C();
         add(report_customers);
         report_customers.setBounds(775, 20, 200, 200);
+        logout.setBounds(130, 0, 100, 20);
         report_customers.setVisible(false);
         report_customers.get_reports();
         m.setOpaque(false);
@@ -77,6 +78,7 @@ public class AdminGui extends JFrame {
         add(m);
         add(o);
         add(gift);
+        add(logout);
         Employee = new buttoncustom("edit Employee");
         Meal = new buttoncustom("edit Meals");
         Employee.setBounds(350, 0, 130, 20);
@@ -172,6 +174,14 @@ public class AdminGui extends JFrame {
                 p.setVisible(false);
                 m.setVisible(false);
                 gift.setVisible(true);
+            }
+        });
+        logout.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new login().setVisible(true);
+                setVisible(false);
             }
         });
 
